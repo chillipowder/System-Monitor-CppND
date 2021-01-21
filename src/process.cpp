@@ -22,9 +22,12 @@ float Process::CpuUtilization() {
     //total process time in seconds 
     float proc_total_time = LinuxParser::ActiveJiffies(pid_) / float(sysconf(_SC_CLK_TCK));
     //elapsed time since process has started in seconds
-    float proc_time_frame = LinuxParser::UpTime() - LinuxParser::UpTime(pid_) / float(sysconf(_SC_CLK_TCK)); 
+    float proc_time_frame = LinuxParser::UpTime() - (LinuxParser::UpTime(pid_) / float(sysconf(_SC_CLK_TCK)));
     if(proc_time_frame != 0) {
       cpu_util_ = proc_total_time / proc_time_frame;
+      if(cpu_util_ >= 1) {
+        cpu_util_ = 1.;
+      }
     } else {
         cpu_util_ = 0;
     }
