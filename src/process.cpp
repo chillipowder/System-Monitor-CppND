@@ -36,7 +36,11 @@ string Process::Command() { return LinuxParser::Command(pid_); }
 
 // Done: Return this process's memory utilization
 string Process::Ram() { 
-  ram_ = std::stoi(LinuxParser::Ram(pid_));
+  if(LinuxParser::Ram(pid_)!= "") {
+    ram_ = std::stoi(LinuxParser::Ram(pid_));
+  } else {
+    ram_ = 0;
+  }
   return LinuxParser::Ram(pid_); }
 
 // Done: Return the user (name) that generated this process
