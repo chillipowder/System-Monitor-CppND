@@ -59,7 +59,7 @@ long int Process::UpTime() {
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a) const { 
 
-  return this->cpu_util_ > a.cpu_util_;   
+  return this->cpu_util_ < a.cpu_util_;
   //return this->ram_ > a.ram_; 
 
 }
